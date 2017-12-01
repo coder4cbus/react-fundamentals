@@ -25,3 +25,29 @@ li {
   font-weight: bold;
   cursor: pointer;
 }
+.popular-list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.popular-item {
+  margin: 20px;
+  text-align: center;
+}
+.avatar {
+  width: 150px;
+  border-radius:50%;
+}
+.space-list-items{
+  display:flex;
+  flex-direction: column;
+  margin-bottom: 7px;
+}
+.link-space{
+  color: FireBrick ;
+  font-weight: bold;
+}
+.popular-rank{
+  font-size: 20px;
+  font-weight: bold;  
+}

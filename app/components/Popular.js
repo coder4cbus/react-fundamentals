@@ -1,5 +1,59 @@
 import React from 'react';
 import api from '../utils/api'
+import PropTypes from 'prop-types'; 
+
+const SelectedLanguage= (props)=>{
+  const  languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];  
+  return (   
+    <div>
+      <ul className='languages'>
+        {languages.map((lang)=> {
+          return (
+            <li
+              style={lang === props.selectedLanguage ? {color: '#d0021b'} : null}
+              onClick={()=>props.updateLanguage(lang)}
+              key={lang}>
+                {lang}
+            </li>
+          )
+        })}
+      </ul>
+    </div> 
+  );
+}
+
+const RepoGrid = (props)=>{
+  return (
+    <ul className="popular-list">
+      {props.repos.map((repo, index)=>{
+        return (
+        <li key={repo.id} className='popular-item'>
+          <div className="popular-rank">#{index+1}</div>
+          <ul className="space-list-items">
+            <li>
+             <img className='avatar' src={repo.owner.avatar_url} alt={repo.owner.login}/>
+            </li>
+            <li>
+             <a className='link-space' href={repo.html_url}>{repo.name.substring(0,15)}</a>
+            </li>
+            <li>@{repo.owner.login}</li>
+            <li>{repo.stargazers_count} stars</li>
+          </ul>
+        </li>
+        )
+      })}
+    </ul>
+  );
+}
+
+RepoGrid.propTypes = {
+  repos: PropTypes.array.isRequired,
+}
+
+SelectedLanguage.propTypes = {
+  selectedLanguage: PropTypes.string.isRequired,
+  updateLanguage : PropTypes.func.isRequired,
+}
 
 class Popular extends React.Component {
   constructor(props) {
@@ -20,29 +74,20 @@ class Popular extends React.Component {
     });
     api.fetchPopularRepos(lang)
     .then((repos)=>{
-      console.log(repos)
+      this.setState(()=>{
+        return {repos}
+      });
     })
   }
   componentDidMount(){
     this.updateLanguage(this.state.selectedLanguage);
   }
   render() {
-    var languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
-
     return (
       <div>
-        <ul className='languages'>
-          {languages.map(function (lang) {
-            return (
-              <li
-                style={lang === this.state.selectedLanguage ? {color: '#d0021b'} : null}
-                onClick={this.updateLanguage.bind(null, lang)}
-                key={lang}>
-                  {lang}
-              </li>
-            )
-          }, this)}
-        </ul>
+      <SelectedLanguage selectedLanguage={this.state.selectedLanguage}
+        updateLanguage={this.updateLanguage} />
+      {!this.state.repos ? <p>Loading</p>: <RepoGrid repos={this.state.repos}/>}  
       </div>
     )
   }
