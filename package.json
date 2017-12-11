@@ -4,15 +4,16 @@
   "description": "Project for React Training's fundamental course.",
   "main": "index.js",
   "scripts": {
+    "precommit": "lint-staged",
     "start": "webpack-dev-server --open"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
   "author": "Tyler McGinnis",
   "license": "MIT",
   "babel": {
-    "presets": [
-      "env",
-      "react"
-    ]
+    "presets": ["env", "react"]
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
@@ -21,6 +22,9 @@
     "babel-preset-react": "^6.23.0",
     "css-loader": "^0.27.3",
     "html-webpack-plugin": "^2.28.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "prettier": "1.9.1",
     "style-loader": "^0.16.0",
     "webpack": "^2.3.1",
     "webpack-dev-server": "^2.4.2"

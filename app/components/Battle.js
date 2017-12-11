@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 
-export default class Battle extends React.Component{
-    render(){
-        return(
-            <div>Hello Battle</div>
-        );
-    }
+export default class Battle extends React.Component {
+  render() {
+    return <div>Hello Battle</div>;
+  }
 }
