@@ -1,7 +1,13 @@
 import React from "react";
+import Contender from './Contender';
 
 export default class Battle extends React.Component {
   render() {
-    return <div>Hello Battle</div>;
+    return (
+        <div>
+        <Contender name={'Camilo'}/>
+        <Contender name={'Andrea'}/>
+        </div>
+    );
   }
 }
