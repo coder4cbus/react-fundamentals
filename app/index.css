@@ -54,3 +54,39 @@ li {
 .nav{
   display: flex;
 }
+.nav li { 
+  margin-right: 15px;
+  color: crimson;
+}
+.nav a.active { 
+  color: darkred;
+  font-weight: bold;
+}
+a {
+  text-decoration: none;
+  color: #d0021b;
+}
+.btn {
+  -webkit-border-radius: 7;
+  -moz-border-radius: 7;
+  border-radius: 7px;
+  -webkit-box-shadow: 0px 1px 3px #666666;
+  -moz-box-shadow: 0px 1px 3px #666666;
+  box-shadow: 0px 1px 3px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #000000;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #000000;
+  background-image: -webkit-linear-gradient(top, #000000, #5c6870);
+  background-image: -moz-linear-gradient(top, #000000, #5c6870);
+  background-image: -ms-linear-gradient(top, #000000, #5c6870);
+  background-image: -o-linear-gradient(top, #000000, #5c6870);
+  background-image: linear-gradient(to bottom, #000000, #5c6870);
+  text-decoration: none;
+}
