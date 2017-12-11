@@ -7,6 +7,7 @@ export default class Battle extends React.Component {
         <div>
             <Contender name={'Camilo'}/>
             <Contender name={'Andrea'}/>
+            <Contender name={'Jimena'}/>
         </div>
     );
   }
