@@ -24,6 +24,7 @@ const SelectedLanguage = props => {
     </div>
   );
 };
+
 const RepoGrid = props => {
   return (
     <ul className="popular-list">
