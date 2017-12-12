@@ -3,30 +3,28 @@ import React from "react";
 export default class Contender extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: "Type the Github user"
-    };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      name: ""
+    };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.handleSubmit(this.props.name, this.state.name);
   }
-  handleChange(event) {
+  handleChange(e) {
     this.setState({
-      name: event.target.value
+      name: e.target.value
     });
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Name</label>
-        <input
-          type="text"
-          value={this.state.name}
-          onChange={this.handleChange}
-        />
-        <input type="submit" value="Submit" />
+      <form className="contender-container" onSubmit={this.handleSubmit}>
+        <label className="label">Name</label>
+        <input className="input" type="text" onChange={this.handleChange} />
+        <input className="btn" type="submit" value="Submit" />
       </form>
     );
   }
