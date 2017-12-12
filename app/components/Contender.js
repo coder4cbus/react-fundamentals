@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-const Contender = function(props){
-    return(        <div>Hello Contender {props.name}</div>    )
-}
+const Contender = function(props) {
+  return <div>Hello Contender {props.name}</div>;
+};
 
 export default Contender;
