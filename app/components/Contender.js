@@ -1,7 +1,7 @@
 import React from "react";
 
-const Contender = function(props) {
-  return <div>Hello Contender {props.name}</div>;
-};
-
-export default Contender;
+export default class Contender extends React.Component {
+  render() {
+    return <div>I am contender {this.props.name}</div>;
+  }
+}
