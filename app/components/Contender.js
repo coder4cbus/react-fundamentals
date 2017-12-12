@@ -24,7 +24,9 @@ export default class Contender extends React.Component {
       <form className="contender-container" onSubmit={this.handleSubmit}>
         <label className="label">Name</label>
         <input className="input" type="text" onChange={this.handleChange} />
-        <input className="btn" type="submit" value="Submit" />
+        <button className="btn" type="submit" disabled={!this.state.name}>
+          Submit
+        </button>
       </form>
     );
   }
