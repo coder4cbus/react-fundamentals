@@ -28,10 +28,24 @@ export default class Battle extends React.Component {
     return (
       <div className="battle-container">
         {!PlayerOneExist && (
-          <Contender handleSubmit={this.handleSubmit} name={"PlayerOne"} />
+          <Contender
+            handleSubmit={this.handleSubmit}
+            name={"PlayerOne"}
+            id={"column1"}
+          />
         )}
         {!PlayerTwoExist && (
-          <Contender handleSubmit={this.handleSubmit} name={"PlayerTwo"} />
+          <Contender
+            handleSubmit={this.handleSubmit}
+            name={"PlayerTwo"}
+            id={"column2"}
+          />
+        )}
+        {PlayerOneExist && (
+          <Contestant img={this.state.PlayerOnePicture} id={"column1"} />
+        )}
+        {PlayerTwoExist && (
+          <Contestant img={this.state.PlayerTwoPicture} id={"column2"} />
         )}
       </div>
     );

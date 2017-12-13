@@ -1,7 +1,14 @@
 import React from "react";
 
-const Contestant = () => {
-  return <div>I am a contestant!</div>;
+const Contestant = props => {
+  return (
+    <div>
+      <div className={`contender-container ${props.id}`}>
+        I am contestant
+        <img className="avatar" src={props.img} alt="" />
+      </div>
+    </div>
+  );
 };
 
 export default Contestant;

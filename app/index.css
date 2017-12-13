@@ -113,3 +113,9 @@ a {
   font-weight: 200;
   font-size: 3em;
 }
+.column1 {
+  order: -1;
+}
+.column2 {
+  order: 1;
+}
