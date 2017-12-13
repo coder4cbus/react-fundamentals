@@ -94,7 +94,7 @@ a {
 }
 .battle-container {
   display: flex;
-  padding: 10%;
+  padding: 10px;
   justify-content: center;
 }
 
@@ -119,4 +119,14 @@ a {
 }
 .column2 {
   order: 1;
+}
+a:hover {
+  font-weight: bolder;
+}
+.button-display {
+  display: flex;
+  justify-content: center;
+}
+.btn.battle {
+  justify-content: center;
 }

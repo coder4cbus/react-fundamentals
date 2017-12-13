@@ -7,7 +7,7 @@ const Contestant = props => {
         <img className="avatar" src={props.img} alt="" />
         <p className="label">@{props.gitUser.toLowerCase()}</p>
         <a
-          className="btn"
+          className="reset"
           onClick={() => {
             props.handleReset(props.name);
           }}

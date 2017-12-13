@@ -1,6 +1,26 @@
 import React from "react";
 import Contender from "./Contender";
 import Contestant from "./Contestant";
+import { Link } from "react-router-dom";
+
+const BattleButton = props => {
+  return (
+    <div className="button-display">
+      <Link
+        className="btn"
+        to={{
+          pathname: `${props.match.url}/results`,
+          search: `?playerOneName=${props.state.PlayerOneName}&playerTwoName=${
+            props.state.PlayerTwoName
+          }`
+        }}
+      >
+        {" "}
+        Battle!{" "}
+      </Link>
+    </div>
+  );
+};
 
 export default class Battle extends React.Component {
   constructor(props) {
@@ -33,40 +53,45 @@ export default class Battle extends React.Component {
   render() {
     const PlayerOneExist = this.state.PlayerOneName;
     const PlayerTwoExist = this.state.PlayerTwoName;
-
+    const BothExist = PlayerOneExist && PlayerTwoExist;
     return (
-      <div className="battle-container">
-        {!PlayerOneExist && (
-          <Contender
-            handleSubmit={this.handleSubmit}
-            name={"PlayerOne"}
-            addedClass={"column1"}
-          />
-        )}
-        {!PlayerTwoExist && (
-          <Contender
-            handleSubmit={this.handleSubmit}
-            name={"PlayerTwo"}
-            addedClass={"column2"}
-          />
-        )}
-        {PlayerOneExist && (
-          <Contestant
-            img={this.state.PlayerOnePicture}
-            name={"PlayerOne"}
-            addedClass={"column1"}
-            gitUser={this.state.PlayerOneName}
-            handleReset={this.handleReset}
-          />
-        )}
-        {PlayerTwoExist && (
-          <Contestant
-            img={this.state.PlayerTwoPicture}
-            name={"PlayerTwo"}
-            addedClass={"column2"}
-            gitUser={this.state.PlayerTwoName}
-            handleReset={this.handleReset}
-          />
+      <div className="contenders-battle-button">
+        <div className="battle-container">
+          {!PlayerOneExist && (
+            <Contender
+              handleSubmit={this.handleSubmit}
+              name={"PlayerOne"}
+              addedClass={"column1"}
+            />
+          )}
+          {!PlayerTwoExist && (
+            <Contender
+              handleSubmit={this.handleSubmit}
+              name={"PlayerTwo"}
+              addedClass={"column2"}
+            />
+          )}
+          {PlayerOneExist && (
+            <Contestant
+              img={this.state.PlayerOnePicture}
+              name={"PlayerOne"}
+              addedClass={"column1"}
+              gitUser={this.state.PlayerOneName}
+              handleReset={this.handleReset}
+            />
+          )}
+          {PlayerTwoExist && (
+            <Contestant
+              img={this.state.PlayerTwoPicture}
+              name={"PlayerTwo"}
+              addedClass={"column2"}
+              gitUser={this.state.PlayerTwoName}
+              handleReset={this.handleReset}
+            />
+          )}
+        </div>
+        {BothExist && (
+          <BattleButton match={this.props.match} state={this.state} />
         )}
       </div>
     );
