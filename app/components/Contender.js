@@ -22,7 +22,7 @@ export default class Contender extends React.Component {
   render() {
     return (
       <form
-        className={`contender-container ${this.props.id}`}
+        className={`contender-container ${this.props.addedClass}`}
         onSubmit={this.handleSubmit}
       >
         <label className="label">{this.props.name}</label>
