@@ -41,7 +41,7 @@ const getUserData = (player)=>{
 module.exports = {
   battle: username => {
     console.log(username)
-    return getProfile(username[0]);
+    return getProfile(username);
   },
   fetchPopularRepos: language => {
     const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:
