@@ -8,18 +8,12 @@
     "start": "webpack-dev-server --open"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
   "author": "Tyler McGinnis",
   "license": "MIT",
   "babel": {
-    "presets": [
-      "env",
-      "react"
-    ]
+    "presets": ["env", "react"]
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
@@ -30,7 +24,7 @@
     "html-webpack-plugin": "^2.28.0",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
-    "prettier": "1.9.1",
+    "prettier": "1.9.2",
     "style-loader": "^0.16.0",
     "webpack": "^2.3.1",
     "webpack-dev-server": "^2.4.2"

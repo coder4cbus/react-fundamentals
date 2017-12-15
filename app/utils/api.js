@@ -1,53 +1,52 @@
 import axios from "axios";
 
-const getProfile = (username)=>{
-  return (axios.get(`https://api.github.com/users/${username}`)
-    .then(user=> user.data))
-}
+const getProfile = username => {
+  return axios
+    .get(`https://api.github.com/users/${username}`)
+    .then(user => user.data);
+};
 
-const getRepos = (username)=>{
-  return axios.get(`https://api.github.com/users/${username}/repos`)
-}
+const getRepos = username => {
+  return axios.get(`https://api.github.com/users/${username}/repos`);
+};
 
-const getStarCount = (repos)=>{
-  return repos.data.reduce((count,repo)=>{
+const getStarCount = repos => {
+  return repos.data.reduce((count, repo) => {
     return count + repo.stargazers_count;
-  },0);
-}
+  }, 0);
+};
 
-const calculateScore = (profile,repos)=>{
+const calculateScore = (profile, repos) => {
   const followers = profile.followers;
   const totalStars = getStarCount(repos);
-  return (followers*3)+totalStars;
-}
+  return followers * 3 + totalStars;
+};
 
-function handleError(){
+function handleError() {
   console.warn(error);
   return null;
 }
 
-const getUserData = (player)=>{
-  return axios.all(
-    getProfile(player),
-    getRepos(player)
-  ).then((data)=>{
+const getUserData = player => {
+  return axios.all(getProfile(player), getRepos(player)).then(data => {
     return {
       profile: data[0],
       score: data[1]
-    }
+    };
   });
-}
+};
 
 module.exports = {
   battle: username => {
-    console.log(username)
-    return axios.all([getProfile(username[0]),
-    getProfile(username[1])]
-        ).
-        then(results => {return {
+    console.log(username);
+    return axios
+      .all([getProfile(username[0]), getProfile(username[1])])
+      .then(results => {
+        return {
           user1: results[0],
-          user2:results[1],
-        }});
+          user2: results[1]
+        };
+      });
   },
   fetchPopularRepos: language => {
     const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:
