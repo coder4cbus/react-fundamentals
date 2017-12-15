@@ -41,7 +41,13 @@ const getUserData = (player)=>{
 module.exports = {
   battle: username => {
     console.log(username)
-    return getProfile(username);
+    return axios.all([getProfile(username[0]),
+    getProfile(username[1])]
+        ).
+        then(results => {return {
+          user1: results[0],
+          user2:results[1],
+        }});
   },
   fetchPopularRepos: language => {
     const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:
