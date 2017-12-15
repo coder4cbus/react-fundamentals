@@ -28,11 +28,17 @@ function handleError() {
 }
 
 const getUserData = player => {
-  return axios.all(getProfile(player), getRepos(player)).then(data => {
+  return axios.all([getProfile(player), getRepos(player)]).then(data => {
     return {
       profile: data[0],
-      score: data[1]
+      score: calculateScore(data[0], data[1])
     };
+  });
+};
+
+const sortPlayers = players => {
+  return players.sort((a, b) => {
+    return b.score - a.score;
   });
 };
 
@@ -40,13 +46,9 @@ module.exports = {
   battle: username => {
     console.log(username);
     return axios
-      .all([getProfile(username[0]), getProfile(username[1])])
-      .then(results => {
-        return {
-          user1: results[0],
-          user2: results[1]
-        };
-      });
+      .all(username.map(getUserData))
+      .then(sortPlayers)
+      .catch(handleError);
   },
   fetchPopularRepos: language => {
     const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:
