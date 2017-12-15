@@ -33,7 +33,7 @@ export default class Results extends React.Component {
     return (
       <div>
         {this.state.loading && "Loading!!"}
-        {/* {console.log(loading)} */}
+        {/* {console.log(loadgit statusing)} */}
       </div>
     );
   }
