@@ -44,7 +44,6 @@ const sortPlayers = players => {
 
 module.exports = {
   battle: username => {
-    console.log(username);
     return axios
       .all(username.map(getUserData))
       .then(sortPlayers)

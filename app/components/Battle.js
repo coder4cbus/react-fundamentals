@@ -78,7 +78,17 @@ export default class Battle extends React.Component {
               addedClass={"column1"}
               gitUser={this.state.PlayerOneName}
               handleReset={this.handleReset}
-            />
+            >
+              <a
+                className="reset"
+                onClick={() => {
+                  this.handleReset(this.PlayerOneName);
+                }}
+              >
+                {" "}
+                reset{" "}
+              </a>
+            </Contestant>
           )}
           {PlayerTwoExist && (
             <Contestant
