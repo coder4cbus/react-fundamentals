@@ -4,17 +4,10 @@ import queryString from "query-string";
 import Contestant from "./Contestant";
 
 const FunctionalResult = props => {
-  const imgW = props.winner.profile.avatar_url;
-  const imgL = props.loser.profile.avatar_url;
-  const gitUserW = props.winner.profile.login;
-  const gitUserL = props.loser.profile.login;
-  console.log(props);
-  return (
-    <div className="battle-container">
-      <Contestant addedClass={"column1"} img={imgW} gitUser={gitUserW} />
-      <Contestant addedClass={"column2"} img={imgL} gitUser={gitUserL} />
-    </div>
-  );
+  const addedClass = `column${props.id}`;
+  const img = props.contender.profile.avatar_url;
+  const gitUser = props.contender.profile.login;
+  return <Contestant img={img} addedClass={addedClass} gitUser={gitUser} />;
 };
 
 export default class Results extends React.Component {
@@ -44,15 +37,16 @@ export default class Results extends React.Component {
   }
   render() {
     const { error, winner, loser, loading } = this.state;
-
+    const players = [winner, loser];
     return (
       <div>
-        {loading ? (
-          "Loading!!"
-        ) : (
-          <FunctionalResult winner={winner} loser={loser} />
-        )}
+        {loading
+          ? "Loading!!"
+          : players.map((index, i) => (
+              <FunctionalResult contender={index} id={i + 1} />
+            ))}
       </div>
     );
   }
 }
+// player.map(index => console.log(index))
