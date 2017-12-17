@@ -34,11 +34,13 @@ const RepoGrid = props => {
             <div className="popular-rank">#{index + 1}</div>
             <ul className="space-list-items">
               <li>
-                <img
-                  className="avatar"
-                  src={repo.owner.avatar_url}
-                  alt={repo.owner.login}
-                />
+                <a href={repo.html_url}>
+                  <img
+                    className="avatar"
+                    src={repo.owner.avatar_url}
+                    alt={repo.owner.login}
+                  />
+                </a>
               </li>
               <li>
                 <a className="link-space" href={repo.html_url}>
