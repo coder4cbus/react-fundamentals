@@ -4,18 +4,15 @@ import queryString from "query-string";
 import Contestant from "./Contestant";
 
 const FunctionalResult = props => {
+  const imgW = props.winner.profile.avatar_url;
+  const imgL = props.loser.profile.avatar_url;
+  const gitUserW = props.winner.profile.login;
+  const gitUserL = props.loser.profile.login;
+  console.log(props);
   return (
     <div className="battle-container">
-      <div className="Column1 contender-container">
-        <h1>Winner !!</h1>
-        <img className="avatar" src={props.winner.profile.avatar_url} />
-        <p className="label">{props.winner.score}</p>
-      </div>
-      <div className="Column2 contender-container">
-        <h1>Loser !!</h1>
-        <img className="avatar" src={props.loser.profile.avatar_url} />
-        <p className="label">{props.loser.score}</p>
-      </div>
+      <Contestant addedClass={"column1"} img={imgW} gitUser={gitUserW} />
+      <Contestant addedClass={"column2"} img={imgL} gitUser={gitUserL} />
     </div>
   );
 };

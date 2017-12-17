@@ -11,9 +11,3 @@ const Contestant = props => {
 };
 
 export default Contestant;
-{
-  /* <a className="reset"
-          onClick={() => {
-          props.handleReset(props.name);
-          }}> reset </a> */
-}
