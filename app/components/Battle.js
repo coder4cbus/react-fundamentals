@@ -82,11 +82,10 @@ export default class Battle extends React.Component {
               <a
                 className="reset"
                 onClick={() => {
-                  this.handleReset(this.PlayerOneName);
+                  this.handleReset("PlayerOne");
                 }}
               >
-                {" "}
-                reset{" "}
+                Reset
               </a>
             </Contestant>
           )}
@@ -97,7 +96,16 @@ export default class Battle extends React.Component {
               addedClass={"column2"}
               gitUser={this.state.PlayerTwoName}
               handleReset={this.handleReset}
-            />
+            >
+              <a
+                className="reset"
+                onClick={() => {
+                  this.handleReset("PlayerTwo");
+                }}
+              >
+                Reset
+              </a>
+            </Contestant>
           )}
         </div>
         {BothExist && (
