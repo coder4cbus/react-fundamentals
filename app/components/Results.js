@@ -49,18 +49,17 @@ export default class Results extends React.Component {
     loading: true
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const player = queryString.parse(this.props.location.search);
-    battle([player.playerOneName, player.playerTwoName]).then(results => {
-      const [winner, loser] = results;
-      this.setState(() => {
-        return {
-          error: "",
-          winner: winner,
-          loser: loser,
-          loading: false
-        };
-      });
+    const players = await battle([player.playerOneName, player.playerTwoName]);
+    const [winner, loser] = players;
+    this.setState(() => {
+      return {
+        error: "",
+        winner: winner,
+        loser: loser,
+        loading: false
+      };
     });
   }
   render() {
