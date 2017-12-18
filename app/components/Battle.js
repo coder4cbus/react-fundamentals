@@ -4,19 +4,18 @@ import Contestant from "./Contestant";
 import { Link } from "react-router-dom";
 
 const BattleButton = props => {
+  const { url } = props.match;
+  const { PlayerOneName, PlayerTwoName } = props.state;
   return (
     <div className="button-display">
       <Link
         className="btn"
         to={{
-          pathname: `${props.match.url}/results`,
-          search: `?playerOneName=${props.state.PlayerOneName}&playerTwoName=${
-            props.state.PlayerTwoName
-          }`
+          pathname: `${url}/results`,
+          search: `?playerOneName=${PlayerOneName}&playerTwoName=${PlayerTwoName}`
         }}
       >
-        {" "}
-        Battle!{" "}
+        Battle!
       </Link>
     </div>
   );
