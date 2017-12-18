@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../utils/api";
+import { battle } from "../utils/api";
 import queryString from "query-string";
 import Contestant from "./Contestant";
 import Loading from "./Loading";
@@ -54,7 +54,7 @@ export default class Results extends React.Component {
 
   componentDidMount() {
     const player = queryString.parse(this.props.location.search);
-    api.battle([player.playerOneName, player.playerTwoName]).then(results => {
+    battle([player.playerOneName, player.playerTwoName]).then(results => {
       const [winner, loser] = results;
       this.setState(() => {
         return {

@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../utils/api";
+import { fetchPopularRepos } from "../utils/api";
 import PropTypes from "prop-types";
 import Loading from "./Loading";
 
@@ -82,7 +82,7 @@ class Popular extends React.Component {
         repos: null
       };
     });
-    api.fetchPopularRepos(lang).then(repos => {
+    fetchPopularRepos(lang).then(repos => {
       this.setState(() => ({ repos }));
     });
   }

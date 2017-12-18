@@ -29,14 +29,25 @@ const getUserData = player =>
 
 const sortPlayers = players => players.sort((a, b) => b.score - a.score);
 
-module.exports = {
-  battle: username =>
-    Promise.all(username.map(getUserData))
-      .then(sortPlayers)
-      .catch(handleError),
-  fetchPopularRepos: language => {
-    const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:
-        ${language}&sort=stars&order=desc&type=Repositories`);
-    return axios.get(encodedURI).then(({ data }) => data.items);
-  }
+export const battle = username =>
+  Promise.all(username.map(getUserData))
+    .then(sortPlayers)
+    .catch(handleError);
+
+export const fetchPopularRepos = language => {
+  const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:
+      ${language}&sort=stars&order=desc&type=Repositories`);
+  return axios.get(encodedURI).then(({ data }) => data.items);
 };
+
+// module.exports = {
+//   battle: username =>
+//     Promise.all(username.map(getUserData))
+//       .then(sortPlayers)
+//       .catch(handleError),
+//   fetchPopularRepos: language => {
+//     const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:
+//         ${language}&sort=stars&order=desc&type=Repositories`);
+//     return axios.get(encodedURI).then(({ data }) => data.items);
+//   }
+// };
