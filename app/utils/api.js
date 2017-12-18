@@ -17,36 +17,26 @@ const getStarCount = repos =>
 const calculateScore = ({ followers }, repos) =>
   followers * 3 + getStarCount(repos);
 
-function handleError() {
-  console.warn(error);
-  return null;
-}
+const handleError = () => console.warn(error) || null;
 
-const getUserData = player => {
-  return axios
-    .all([getProfile(player), getRepos(player)])
-    .then(([profile, repos]) => {
-      return {
-        profile,
-        score: calculateScore(profile, repos)
-      };
-    });
-};
+const getUserData = player =>
+  Promise.all([getProfile(player), getRepos(player)]).then(
+    ([profile, repos]) => ({
+      profile,
+      score: calculateScore(profile, repos)
+    })
+  );
 
 const sortPlayers = players => players.sort((a, b) => b.score - a.score);
 
 module.exports = {
-  battle: username => {
-    return axios
-      .all(username.map(getUserData))
+  battle: username =>
+    Promise.all(username.map(getUserData))
       .then(sortPlayers)
-      .catch(handleError);
-  },
+      .catch(handleError),
   fetchPopularRepos: language => {
     const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:
         ${language}&sort=stars&order=desc&type=Repositories`);
-    return axios.get(encodedURI).then(response => {
-      return response.data.items;
-    });
+    return axios.get(encodedURI).then(({ data }) => data.items);
   }
 };
