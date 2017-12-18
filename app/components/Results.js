@@ -6,7 +6,7 @@ import Loading from "./Loading";
 
 const FunctionalResult = ({ id, contender }) => {
   const addedClass = `column${id}`;
-  const { profile } = contender;
+  const { profile, score } = contender;
   const {
     name,
     location,
@@ -21,7 +21,7 @@ const FunctionalResult = ({ id, contender }) => {
   return (
     <div>
       <h1>{id === 1 ? "Winner" : "Loser"}</h1>
-      <p>Score: {contender.score}</p>
+      <p>Score: {score}</p>
       <Contestant img={avatar_url} addedClass={addedClass} gitUser={login}>
         <ul>
           {name && <li>{name}</li>}
