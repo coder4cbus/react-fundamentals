@@ -4,10 +4,14 @@ import Nav from "./Nav";
 import Results from "./Results";
 import Home from "./Home";
 import Battle from "./Battle";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NavLink from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  NavLink
+} from "react-router-dom";
 
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
       <Router>
@@ -29,5 +33,3 @@ class App extends React.Component {
     );
   }
 }
-
-module.exports = App;
