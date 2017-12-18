@@ -42,15 +42,12 @@ const FunctionalResult = ({ id, contender }) => {
 };
 
 export default class Results extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      winner: null,
-      loser: null,
-      loading: true
-    };
-  }
+  state = {
+    error: null,
+    winner: null,
+    loser: null,
+    loading: true
+  };
 
   componentDidMount() {
     const player = queryString.parse(this.props.location.search);

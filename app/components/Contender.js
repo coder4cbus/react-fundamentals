@@ -1,24 +1,24 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default class Contender extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {
-      name: ""
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleSubmit(e) {
+  static propTypes = {
+    addedClass: PropTypes.string.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired
+  };
+  state = {
+    name: ""
+  };
+  handleSubmit = e => {
     e.preventDefault();
     this.props.handleSubmit(this.props.name, this.state.name);
-  }
-  handleChange(e) {
+  };
+  handleChange = e => {
     this.setState({
       name: e.target.value
     });
-  }
+  };
   render() {
     return (
       <form

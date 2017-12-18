@@ -1,12 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
+import defaultProps from "react-default-props";
 
 export default class Loading extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: props.text
-    };
-  }
+  static defaultProps = {
+    text: "Loading",
+    speed: 300
+  };
+  static propTypes = {
+    text: PropTypes.string.isRequired
+  };
+  state = {
+    text: this.props.text
+  };
   componentDidMount() {
     const stopper = `${this.state.text}...`;
     this.interval = window.setInterval(() => {
@@ -38,8 +44,3 @@ export default class Loading extends React.Component {
     return <p style={styles.content}>{this.state.text}</p>;
   }
 }
-
-Loading.defaultProps = {
-  text: "Loading",
-  speed: 300
-};
