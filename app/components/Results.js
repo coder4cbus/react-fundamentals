@@ -4,26 +4,35 @@ import queryString from "query-string";
 import Contestant from "./Contestant";
 import Loading from "./Loading";
 
-const FunctionalResult = props => {
-  const addedClass = `column${props.id}`;
-  const img = props.contender.profile.avatar_url;
-  const gitUser = props.contender.profile.login;
-  const info = props.contender.profile;
+const FunctionalResult = ({ id, contender }) => {
+  const addedClass = `column${id}`;
+  const { profile } = contender;
+  const {
+    name,
+    location,
+    company,
+    followers,
+    following,
+    public_repos,
+    blog,
+    avatar_url,
+    login
+  } = profile;
   return (
     <div>
-      <h1>{props.id === 1 ? "Winner" : "Loser"}</h1>
-      <p>Score: {props.contender.score}</p>
-      <Contestant img={img} addedClass={addedClass} gitUser={gitUser}>
+      <h1>{id === 1 ? "Winner" : "Loser"}</h1>
+      <p>Score: {contender.score}</p>
+      <Contestant img={avatar_url} addedClass={addedClass} gitUser={login}>
         <ul>
-          {info.name && <li>{info.name}</li>}
-          {info.location && <li>{info.location}</li>}
-          {info.location && <li>{info.company}</li>}
-          <li>Followers: {info.followers}</li>
-          <li>Following: {info.following}</li>
-          <li>Public Repos: {info.public_repos}</li>
-          {info.blog && (
+          {name && <li>{name}</li>}
+          {location && <li>{location}</li>}
+          {location && <li>{company}</li>}
+          <li>Followers: {followers}</li>
+          <li>Following: {following}</li>
+          <li>Public Repos: {public_repos}</li>
+          {blog && (
             <li>
-              <a href={info.blog}>{info.blog}</a>
+              <a href={blog}>{blog}</a>
             </li>
           )}
         </ul>
