@@ -2,12 +2,34 @@ import React from "react";
 import api from "../utils/api";
 import queryString from "query-string";
 import Contestant from "./Contestant";
+import Loading from "./Loading";
 
 const FunctionalResult = props => {
   const addedClass = `column${props.id}`;
   const img = props.contender.profile.avatar_url;
   const gitUser = props.contender.profile.login;
-  return <Contestant img={img} addedClass={addedClass} gitUser={gitUser} />;
+  const info = props.contender.profile;
+  return (
+    <div>
+      <h1>{props.id === 1 ? "Winner" : "Loser"}</h1>
+      <p>Score: {props.contender.score}</p>
+      <Contestant img={img} addedClass={addedClass} gitUser={gitUser}>
+        <ul>
+          {info.name && <li>{info.name}</li>}
+          {info.location && <li>{info.location}</li>}
+          {info.location && <li>{info.company}</li>}
+          <li>Followers: {info.followers}</li>
+          <li>Following: {info.following}</li>
+          <li>Public Repos: {info.public_repos}</li>
+          {info.blog && (
+            <li>
+              <a href={info.blog}>{info.blog}</a>
+            </li>
+          )}
+        </ul>
+      </Contestant>
+    </div>
+  );
 };
 
 export default class Results extends React.Component {
@@ -39,14 +61,15 @@ export default class Results extends React.Component {
     const { error, winner, loser, loading } = this.state;
     const players = [winner, loser];
     return (
-      <div>
-        {loading
-          ? "Loading!!"
-          : players.map((index, i) => (
-              <FunctionalResult contender={index} id={i + 1} />
-            ))}
+      <div className="battle-container">
+        {loading ? (
+          <Loading />
+        ) : (
+          players.map((index, i) => (
+            <FunctionalResult contender={index} id={i + 1} key={i} />
+          ))
+        )}
       </div>
     );
   }
 }
-// player.map(index => console.log(index))
