@@ -1,26 +1,21 @@
 import axios from "axios";
 
-const getProfile = username => {
-  return axios
+const getProfile = username =>
+  axios
     .get(`https://api.github.com/users/${username}`)
-    .then(user => user.data);
-};
+    .then(({ data }) => data);
 
-const getRepos = username => {
-  return axios.get(`https://api.github.com/users/${username}/repos`);
-};
+const getRepos = username =>
+  axios.get(`https://api.github.com/users/${username}/repos`);
 
-const getStarCount = repos => {
-  return repos.data.reduce((count, repo) => {
-    return count + repo.stargazers_count;
-  }, 0);
-};
+const getStarCount = repos =>
+  repos.data.reduce(
+    (count, { stargazers_count }) => count + stargazers_count,
+    0
+  );
 
-const calculateScore = (profile, repos) => {
-  const followers = profile.followers;
-  const totalStars = getStarCount(repos);
-  return followers * 3 + totalStars;
-};
+const calculateScore = ({ followers }, repos) =>
+  followers * 3 + getStarCount(repos);
 
 function handleError() {
   console.warn(error);
@@ -28,19 +23,17 @@ function handleError() {
 }
 
 const getUserData = player => {
-  return axios.all([getProfile(player), getRepos(player)]).then(data => {
-    return {
-      profile: data[0],
-      score: calculateScore(data[0], data[1])
-    };
-  });
+  return axios
+    .all([getProfile(player), getRepos(player)])
+    .then(([profile, repos]) => {
+      return {
+        profile,
+        score: calculateScore(profile, repos)
+      };
+    });
 };
 
-const sortPlayers = players => {
-  return players.sort((a, b) => {
-    return b.score - a.score;
-  });
-};
+const sortPlayers = players => players.sort((a, b) => b.score - a.score);
 
 module.exports = {
   battle: username => {
